@@ -1,17 +1,15 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-
-import { useState } from '@hookstate/core';
-import store from '../store';
+import { useAuthState } from '../store/auth';
 
 function ProtectedRoute({ component: Component, ...restOfProps }) {
-  const { user } = useState(store)
+  const { isAuthenticated } = useAuthState()
 
   return (
     <Route
       {...restOfProps}
       render={(props) =>
-        user.value.id ? <Component {...props} /> : <Redirect to="/auth/login" />
+        isAuthenticated.value ? <Component {...props} /> : <Redirect to="/auth/login" />
       }
     />
   );

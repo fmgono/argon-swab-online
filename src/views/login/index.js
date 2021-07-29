@@ -1,4 +1,3 @@
-import axios from '../../axios'
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import {
@@ -16,16 +15,14 @@ import {
   Row,
   Col,
 } from "reactstrap";
-// import { useState } from "react";
 import { useState } from '@hookstate/core';
-import store from '../../store';
+import { login } from '../../store/auth';
 
 const REQUIRED_MESSAGES = 'Harus diisi'
 
 const Login = () => {
   const history = useHistory()
   const error = useState(false)
-  const { user } = useState(store)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -42,21 +39,11 @@ const Login = () => {
       return errors
     },
     onSubmit: async value => {
-      const payload = {
-        userId: value.email,
-        password: value.password,
-      }
-
       try {
-        const { data } = await axios.post('/login', payload)
-        const dataUser = {
-          id: data.id,
-          email: data.email,
-          fullName: data.full_name,
-          mobile: data.mobile,
-          mobileCountryCode: data.mobile_country_code,
-        }
-        user.set(dataUser)
+        await login({
+          email: value.email,
+          password: value.password,
+        })
         history.push('/admin/index')
       } catch (e) {
         error.set(true)
