@@ -29,24 +29,24 @@ const Footer = () => {
             © {new Date().getFullYear()}{" "}
             <a
               className="font-weight-bold ml-1"
-              href="https://www.creative-tim.com?ref=adr-admin-footer"
+              href="https://dewatasoft.com"
               rel="noopener noreferrer"
               target="_blank"
             >
-              Creative Tim
+              Dewatasoft
             </a>
           </div>
         </Col>
 
-        <Col xl="6">
+        {/* <Col xl="6">
           <Nav className="nav-footer justify-content-center justify-content-xl-end">
             <NavItem>
               <NavLink
-                href="https://www.creative-tim.com?ref=adr-admin-footer"
+                href="https://dewatasoft.com"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                Creative Tim
+                Dewatasoft
               </NavLink>
             </NavItem>
 
@@ -80,7 +80,7 @@ const Footer = () => {
               </NavLink>
             </NavItem>
           </Nav>
-        </Col>
+        </Col> */}
       </Row>
     </footer>
   );
