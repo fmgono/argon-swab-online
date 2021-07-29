@@ -12,13 +12,22 @@ import {
   Row,
   Col,
   Label,
+  Modal,
+  ModalHeader,
+  ModalBody,
 } from "reactstrap";
 import { useFormik } from 'formik';
 import axios from '../../axios'
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const REQUIRED_MESSAGES = 'Harus diisi'
 
 const Register = () => {
+  const history = useHistory()
+  const redirectToLogin = () => history.push('auth/login')
+
+  const [isModalOpen, setModalOpen] = useState(false)
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -91,9 +100,12 @@ const Register = () => {
         email: value.email,
         password: value.password,
       }
-
-      const res = await axios.post('/register', payload)
-      console.log('res => ', res)
+      try {
+        const res = await axios.post('/register', payload)
+        setModalOpen(true)
+      } catch (e) {
+        alert('Terjadi kesalahan! Silahkan hubungi customer service kami!')
+      }
     },
   });
   return (
@@ -152,7 +164,7 @@ const Register = () => {
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input 
-                          type="text"
+                          type="number"
                           id="phoneNumber"
                           name="phoneNumber"
                           placeholder="81312345678"
@@ -201,7 +213,7 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input 
-                    type="text"
+                    type="number"
                     id="identityNumber" 
                     name="identityNumber" 
                     placeholder="31780001191289192"
@@ -372,6 +384,48 @@ const Register = () => {
               </div>
             </Form>
           </CardBody>
+          <Modal
+              className="modal-dialog-centered modal-danger"
+              contentClassName="bg-gradient-primary"
+              isOpen={isModalOpen}
+              toggle={() => setModalOpen(!isModalOpen)}
+            >
+              <div className="modal-header">
+                <h3 className="modal-title" id="modal-title-notification">
+                  Berhasil!
+                </h3>
+                <button
+                  aria-label="Close"
+                  className="close"
+                  data-dismiss="modal"
+                  type="button"
+                  onClick={() => setModalOpen(!isModalOpen)}
+                >
+                  <span aria-hidden={true}>×</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <div className="py-3 text-center">
+                  <i className="ni ni-check-bold ni-3x" />
+                  <h4 className="mt-4 heading">
+                    Registrasi Berhasil!
+                  </h4>
+                  <p>
+                    Langkah selanjutnya adalah verifikasi, dimana akan dikirimkan link verifikasi ke nomor Whatsapp.
+                  </p>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <Button 
+                  type="button" 
+                  className="btn-white" 
+                  color="default" 
+                  style={{ width: '100%' }}
+                  onClick={redirectToLogin}>
+                  Baik, saya Paham
+                </Button>
+              </div>
+            </Modal>
         </Card>
       </Col>
     </>
