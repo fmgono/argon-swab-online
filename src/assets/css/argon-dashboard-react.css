@@ -200,6 +200,7 @@ th {
   text-align: -webkit-match-parent; }
 
 label {
+  font-weight: 500 !important;
   display: inline-block;
   margin-bottom: 0.5rem; }
 
