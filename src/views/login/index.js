@@ -18,7 +18,7 @@ import {
 } from "reactstrap";
 // import { useState } from "react";
 import { useState } from '@hookstate/core';
-import store from 'store';
+import store from '../../store';
 
 const REQUIRED_MESSAGES = 'Harus diisi'
 
