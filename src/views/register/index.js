@@ -13,8 +13,6 @@ import {
   Col,
   Label,
   Modal,
-  ModalHeader,
-  ModalBody,
 } from "reactstrap";
 import { useFormik } from 'formik';
 import axios from '../../axios'
@@ -25,7 +23,7 @@ const REQUIRED_MESSAGES = 'Harus diisi'
 
 const Register = () => {
   const history = useHistory()
-  const redirectToLogin = () => history.push('auth/login')
+  const redirectToLogin = () => history.push('/auth/login')
 
   const [isModalOpen, setModalOpen] = useState(false)
   const formik = useFormik({
@@ -101,7 +99,7 @@ const Register = () => {
         password: value.password,
       }
       try {
-        const res = await axios.post('/register', payload)
+        await axios.post('/register', payload)
         setModalOpen(true)
       } catch (e) {
         alert('Terjadi kesalahan! Silahkan hubungi customer service kami!')
