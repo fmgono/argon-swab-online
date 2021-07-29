@@ -14,7 +14,6 @@ const initialState = {
 }
 
 const authState = createState(initialState)
-
 /**
  * @TODO  action to request to login endpoint and set global state for user
  * @param {object} payload

@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -16,8 +17,15 @@ import {
   Container,
   Media,
 } from "reactstrap";
+import { useAuthState, logout } from '../../store/auth';
 
 const AdminNavbar = (props) => {
+  const { user } = useAuthState()
+  const history = useHistory()
+  const handleLogout = () => {
+    logout()
+    history.replace('auth/admin')
+  }
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -55,7 +63,7 @@ const AdminNavbar = (props) => {
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      Jessica Jones
+                      { user.value.fullName }
                     </span>
                   </Media>
                 </Media>
@@ -81,7 +89,7 @@ const AdminNavbar = (props) => {
                   <span>Support</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem href="#pablo" onClick={handleLogout}>
                   <i className="ni ni-user-run" />
                   <span>Logout</span>
                 </DropdownItem>
