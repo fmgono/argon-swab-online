@@ -29,6 +29,32 @@ import { useState } from "@hookstate/core";
 
 const CustomerDashboard = () => {
   const filter = useState('completed')
+  const datas = [
+    {
+      fullName: 'Andika Pratama',
+      sex: 'Pria',
+      address: 'Jl. Ciliwung, Condet, DKI Jakarta',
+      paymentStatus: 'Pending',
+    },
+    {
+      fullName: 'Sri Wulandari',
+      sex: 'Wanita',
+      address: 'Jl. Kemang Raya, DKI Jakarta',
+      paymentStatus: 'Selesai',
+    },
+    {
+      fullName: 'Widya Ayu',
+      sex: 'Wanita',
+      address: 'Jl. Kebon Pala II, DKI Jakarta',
+      paymentStatus: 'Dibatalkan',
+    },
+    {
+      fullName: 'Yuda Wibowo',
+      sex: 'Pria',
+      address: 'Jl. Mandala 5, DKI Jakarta',
+      paymentStatus: 'Dibatalkan',
+    },
+  ]
   return (
     <>
       <Header />
@@ -91,8 +117,8 @@ const CustomerDashboard = () => {
                   </Col>
                   <Col md="6" className="text-right">
                     <Button
-                      color="primary"
-                      className="btn-icon"
+                      color="info"
+                      className="bg-gradient-info btn-icon"
                       onClick={(e) => e.preventDefault()}
                     >
                       <span className="btn-inner--icon">
@@ -114,18 +140,23 @@ const CustomerDashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  {datas.map(field => (
+                  <tr key={field.fullName}>
                     <th scope="row">
-                      Andika Pratama
+                      {field.fullName}
                     </th>
                     <td>Pria</td>
                     <td>
-                      Jl. Ciliwung, Condet, DKI Jakarta
+                      {field.address}
                     </td>
                     <td>
                       <Badge color="" className="mr-4 badge-dot">
-                        <i className="bg-warning" />
-                        Pending
+                        <i className={classnames({
+                          'bg-primary': field.paymentStatus === 'Selesai',
+                          'bg-info': field.paymentStatus === 'Pending',
+                          'bg-danger': field.paymentStatus === 'Dibatalkan',
+                        })} />
+                        {field.paymentStatus}
                       </Badge>
                     </td>
                     <td className="text-right">
@@ -163,6 +194,7 @@ const CustomerDashboard = () => {
                       </UncontrolledDropdown>
                     </td>
                   </tr>
+                  ))}
                 </tbody>
               </Table>
               <CardFooter className="py-4">
