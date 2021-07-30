@@ -16,7 +16,7 @@ import {
   Col,
 } from "reactstrap";
 import { useState } from '@hookstate/core';
-import { login } from '../../store/auth';
+import { login } from 'store/auth';
 
 const REQUIRED_MESSAGES = 'Harus diisi'
 
