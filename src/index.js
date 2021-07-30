@@ -24,6 +24,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/argon-dashboard-react.scss";
 
 import AdminLayout from "layouts/Admin.js";
+import CustomerLayout from "layouts/Customer.js";
 import AuthLayout from "layouts/Auth.js";
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -31,8 +32,9 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <ProtectedRoute path="/admin" component={AdminLayout} />
+      <ProtectedRoute path="/customer" component={CustomerLayout} />
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Redirect from="/" to="/admin/index" />
+      {/* <Redirect from="/" to="/admin/index" /> */}
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

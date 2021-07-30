@@ -44,7 +44,7 @@ const Login = () => {
           email: value.email,
           password: value.password,
         })
-        history.push('/admin/index')
+        history.push('/customer/index')
       } catch (e) {
         error.set(true)
         throw new Error(e)

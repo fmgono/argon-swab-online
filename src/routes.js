@@ -23,6 +23,7 @@ import Maps from "views/examples/Maps.js";
 import Login from "views/login/index";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
+import CustomerDashboard from "views/customers/Dashboard";
 
 var routes = [
   {
@@ -73,6 +74,13 @@ var routes = [
     icon: "ni ni-circle-08 text-pink",
     component: Register,
     layout: "/auth",
+  },
+  {
+    path: "/index",
+    name: "Dashboard",
+    icon: "ni ni-tv-2 text-primary",
+    component: CustomerDashboard,
+    layout: "/customer",
   },
 ];
 export default routes;
