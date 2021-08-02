@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import {
   Alert,
@@ -119,20 +119,15 @@ const Login = () => {
           <Col xs="6">
             <a
               className="text-light"
-              href="#pablo"
               onClick={(e) => e.preventDefault()}
             >
               <small>Lupa Kata Sandi ?</small>
             </a>
           </Col>
           <Col className="text-right" xs="6">
-            <a
-              className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              <small>Daftar Akun</small>
-            </a>
+          <Link to="/auth/register" className="text-light">
+            <small>Daftar Akun</small>
+          </Link>
           </Col>
         </Row>
       </Col>
