@@ -51,7 +51,7 @@ const AdminNavbar = (props) => {
                 </Media>
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-arrow" right>
-                <DropdownItem to="/admin/user-profile" tag={Link}>
+                <DropdownItem to="/customer/profile" tag={Link}>
                   <i className="ni ni-single-02" />
                   <span>Profil</span>
                 </DropdownItem>
