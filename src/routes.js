@@ -85,7 +85,7 @@ var routes = [
   },
   {
     path: "/profile",
-    name: "Dashboard",
+    name: "Profile",
     icon: "ni ni-tv-2 text-primary",
     component: CustomerProfile,
     layout: "/customer",
