@@ -55,6 +55,10 @@ const AdminNavbar = (props) => {
                   <i className="ni ni-single-02" />
                   <span>Profil</span>
                 </DropdownItem>
+                <DropdownItem to="/customer/change-password" tag={Link}>
+                  <i className="ni ni-lock-circle-open" />
+                  <span>Ubah Password</span>
+                </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem href="#pablo" onClick={handleLogout}>
                   <i className="ni ni-user-run" />

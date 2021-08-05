@@ -25,6 +25,7 @@ import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
 import CustomerDashboard from "views/customers/Dashboard";
 import CustomerProfile from "views/customers/Profile.js";
+import CustomerChangePassword from "views/customers/ChangePassword.js";
 
 var routes = [
   {
@@ -88,6 +89,13 @@ var routes = [
     name: "Profile",
     icon: "ni ni-tv-2 text-primary",
     component: CustomerProfile,
+    layout: "/customer",
+  },
+  {
+    path: "/change-password",
+    name: "Ubah Password",
+    icon: "ni ni-tv-2 text-primary",
+    component: CustomerChangePassword,
     layout: "/customer",
   },
 ];
