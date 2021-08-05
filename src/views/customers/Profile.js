@@ -14,17 +14,25 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-} from "reactstrap";
+  Modal,
+  Alert,
+} from "reactstrap"
 // core components
 
-import axios from "axios";
-import { useFormik } from "formik";
+import axios from '../../axios'
+import { useFormik } from "formik"
+import { useEffect, useState } from "react"
+import { useAuthState } from '../../store/auth'
 
 const REQUIRED_MESSAGES = 'Harus diisi'
 
 const Profile = () => {
+  const { user } = useAuthState()
+  const [isSuccess, setSuccess] = useState(false)
+  const [isConfirmModalOpen, setConfirmModalOpen] = useState(false)
   const formik = useFormik({
     initialValues: {
+      id: '',
       name: '',
       phoneCountryCode: '+62',
       phoneNumber: '812198712912',
@@ -72,6 +80,7 @@ const Profile = () => {
     },
     onSubmit: async value => {
       const payload = {
+        id: value.id,
         full_name: value.name,
         mobile_country_code: value.phoneCountryCode,
         mobile: value.phoneNumber,
@@ -82,16 +91,37 @@ const Profile = () => {
         sex: value.sex,
         address: value.address,
         email: value.email,
-        password: value.password,
       }
       try {
-        await axios.post('/register', payload)
-        // setModalOpen(true)
+        await axios.put('/users', payload)
+        setConfirmModalOpen(false)
+        setSuccess(true)
       } catch (e) {
         alert('Terjadi kesalahan! Silahkan hubungi customer service kami!')
       }
     },
   });
+  useEffect(() => {
+    const getProfile = async () => {
+      const { data } = await axios.get(`profile/${user.id.value}`)
+      const date = new Date(data.dob)
+      formik.setValues({
+        id: data.id,
+        name: data.full_name,
+        phoneCountryCode: data.mobile_country_code,
+        phoneNumber: data.mobile,
+        identityType: data.id_type,
+        identityNumber: data.id_num,
+        dateOfBirth: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+        placeOfBirth: data.pob,
+        sex: data.sex,
+        address: data.address,
+        email: data.email
+      })
+    }
+
+    getProfile()
+  }, [])
   return (
     <>
       <div className="pt-5 pb-8 header bg-gradient-info pt-md-8">
@@ -103,7 +133,7 @@ const Profile = () => {
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">Profil Saya</h3>
+                    <h3 className="mb-0">Pebarui Profil Saya</h3>
                   </Col>
                 </Row>
               </CardHeader>
@@ -176,6 +206,7 @@ const Profile = () => {
                           id="ktp"
                           value="KTP"
                           name="identityType"
+                          checked={formik.values.identityType === 'KTP'}
                           onChange={formik.handleChange}/>{' '}
                           KTP
                       </Label>
@@ -187,6 +218,7 @@ const Profile = () => {
                           id="passport"
                           value="PASSPORT"
                           name="identityType"
+                          checked={formik.values.identityType === 'PASSPORT'}
                           onChange={formik.handleChange}/>{' '}
                           Passport
                       </Label>
@@ -258,6 +290,7 @@ const Profile = () => {
                           id="pria"
                           value="Pria"
                           name="sex"
+                          checked={formik.values.sex === 'Pria'}
                           onChange={formik.handleChange}/>{' '}
                           Pria
                       </Label>
@@ -269,6 +302,7 @@ const Profile = () => {
                           id="wanita"
                           value="Wanita"
                           name="sex"
+                          checked={formik.values.sex === 'Wanita'}
                           onChange={formik.handleChange}/>{' '}
                           Wanita
                       </Label>
@@ -314,9 +348,44 @@ const Profile = () => {
                   {formik.errors.email ? <small className="text-red">{formik.errors.email}</small> : null}
                 </FormGroup>
                 <div className="text-center">
-                  <Button color="primary" type="submit" style={{ width: '100%' }}>
-                    Daftar
-                  </Button>
+                  {/* <Button color="primary" type="button" onClick={() => setConfirmModalOpen(!isConfirmModalOpen)} style={{ width: '100%' }}>
+                    Simpan Perubahan
+                  </Button> */}
+                  { !isSuccess 
+                    ?
+                    <Button color="primary" type="button" onClick={() => setConfirmModalOpen(!isConfirmModalOpen)} style={{ width: '100%' }}>
+                      Simpan Perubahan
+                    </Button>
+                    : 
+                    <Alert color="success" className="mt-2">
+                      <strong>Berhasil!</strong> Data sudah berhasil di perbarui.
+                    </Alert> }
+                  <Modal
+                    className="modal-dialog-centered"
+                    isOpen={isConfirmModalOpen}
+                    toggle={() => setConfirmModalOpen(!isConfirmModalOpen)}
+                  >
+                    <div className="modal-header">
+                      <h3 className="modal-title" id="exampleModalLabel">
+                        Perubahan Profil
+                      </h3>
+                    </div>
+                    <div className="modal-body">
+                      Anda yakin untuk melakukan perubahan data profil ?
+                    </div>
+                    <div className="modal-footer">
+                      <Button
+                        data-dismiss="modal"
+                        type="button"
+                        onClick={() => setConfirmModalOpen(!isConfirmModalOpen)}
+                      >
+                        Tidak, tunggu dulu
+                      </Button>
+                      <Button color="primary" onClick={formik.handleSubmit}>
+                        Ya, Saya yakin
+                      </Button>
+                    </div>
+                  </Modal>
                 </div>
               </Form>
               </CardBody>
