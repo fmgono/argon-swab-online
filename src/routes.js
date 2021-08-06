@@ -86,14 +86,14 @@ var routes = [
   },
   {
     path: "/profile",
-    name: "Profile",
+    name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: CustomerProfile,
     layout: "/customer",
   },
   {
     path: "/change-password",
-    name: "Ubah Password",
+    name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: CustomerChangePassword,
     layout: "/customer",

@@ -354,7 +354,7 @@ const Profile = () => {
                   { !isSuccess 
                     ?
                     <Button color="primary" type="button" onClick={() => setConfirmModalOpen(!isConfirmModalOpen)} style={{ width: '100%' }}>
-                      Simpan Perubahan
+                      Simpan
                     </Button>
                     : 
                     <Alert color="success" className="mt-2">
