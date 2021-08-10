@@ -197,7 +197,7 @@ const Profile = () => {
                   </Row>
                 </FormGroup>
                 <FormGroup>
-                  <Label>Tipe Identitas</Label>
+                  <Label className="form-control-label">Tipe Identitas</Label>
                   <FormGroup>
                     <FormGroup check inline>
                       <Label check>
