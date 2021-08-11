@@ -27,8 +27,12 @@ import { Link } from "react-router-dom";
 import Header from "components/Headers/CustomerHeader.js";
 import classnames from "classnames";
 import { useState } from "@hookstate/core";
+import { useEffect } from "react";
+import axios from '../../axios'
+import { useAuthState } from '../../store/auth'
 
 const CustomerDashboard = () => {
+  const { user } = useAuthState()
   const filter = useState('completed')
   const datas = [
     {
@@ -56,6 +60,15 @@ const CustomerDashboard = () => {
       paymentStatus: 'Dibatalkan',
     },
   ]
+
+  useEffect(() => {
+    const getBookingOrder = async () => {
+      const { data } = await axios.get(`queue/${user.id.value}/10`)
+      console.log(data)
+    }
+
+    getBookingOrder()
+  })
   return (
     <>
       <Header />
