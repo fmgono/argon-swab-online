@@ -25,6 +25,7 @@ import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
 import CustomerDashboard from "views/customers/Dashboard";
 import CustomerProfile from "views/customers/Profile.js";
+import CustomerQueueForm from "views/customers/QueueForm.js";
 import CustomerChangePassword from "views/customers/ChangePassword.js";
 
 var routes = [
@@ -89,6 +90,13 @@ var routes = [
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: CustomerProfile,
+    layout: "/customer",
+  },
+  {
+    path: "/booking/add",
+    name: "Dashboard",
+    icon: "ni ni-tv-2 text-primary",
+    component: CustomerQueueForm,
     layout: "/customer",
   },
   {

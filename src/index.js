@@ -34,7 +34,7 @@ ReactDOM.render(
       <ProtectedRoute path="/admin" component={AdminLayout} />
       <ProtectedRoute path="/customer" component={CustomerLayout} />
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Redirect from="/" to="/admin/index" />
+      <Redirect from="/" to="/customer/index" />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

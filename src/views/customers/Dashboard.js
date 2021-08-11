@@ -23,6 +23,7 @@ import {
   NavLink,
 } from "reactstrap";
 // core components
+import { Link } from "react-router-dom";
 import Header from "components/Headers/CustomerHeader.js";
 import classnames from "classnames";
 import { useState } from "@hookstate/core";
@@ -116,16 +117,17 @@ const CustomerDashboard = () => {
                     </Nav>
                   </Col>
                   <Col md="6" className="text-right">
-                    <Button
-                      color="info"
-                      className="bg-gradient-info btn-icon"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <span className="btn-inner--icon">
-                        <i className="ni ni-fat-add" />
-                      </span>
-                      Tambah Antrian
-                    </Button>
+                    <Link to="/customer/booking/add">
+                      <Button
+                        color="info"
+                        className="bg-gradient-info btn-icon"
+                      >
+                        <span className="btn-inner--icon">
+                          <i className="ni ni-fat-add" />
+                        </span>
+                        Tambah Antrian
+                      </Button>
+                    </Link>
                   </Col>
                 </Row>
               </CardHeader>
