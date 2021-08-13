@@ -34,41 +34,36 @@ import { useAuthState } from '../../store/auth'
 const CustomerDashboard = () => {
   const { user } = useAuthState()
   const filter = useState('completed')
-  const datas = [
-    {
-      fullName: 'Andika Pratama',
-      sex: 'Pria',
-      address: 'Jl. Ciliwung, Condet, DKI Jakarta',
-      paymentStatus: 'Pending',
-    },
-    {
-      fullName: 'Sri Wulandari',
-      sex: 'Wanita',
-      address: 'Jl. Kemang Raya, DKI Jakarta',
-      paymentStatus: 'Selesai',
-    },
-    {
-      fullName: 'Widya Ayu',
-      sex: 'Wanita',
-      address: 'Jl. Kebon Pala II, DKI Jakarta',
-      paymentStatus: 'Dibatalkan',
-    },
-    {
-      fullName: 'Yuda Wibowo',
-      sex: 'Pria',
-      address: 'Jl. Mandala 5, DKI Jakarta',
-      paymentStatus: 'Dibatalkan',
-    },
-  ]
+  const bookingOrder = useState({
+    totalRows: 0,
+    data: [
+      {
+        customer_full_name: '',
+        session_date: '',
+        session_time: '',
+        session_name: '',
+        payment_status : '',
+      }
+    ]
+  })
 
   useEffect(() => {
     const getBookingOrder = async () => {
       const { data } = await axios.get(`queue/${user.id.value}/10`)
-      console.log(data)
+      data.data = data.data.map(field => {
+        const date = new Date(field.session_date)
+        field.session_date = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
+        return field
+      })
+      bookingOrder.set({
+        totalRows: data.total_rows,
+        data: data.data
+      })
+      console.log('bookingOrder.value', bookingOrder.value)
     }
 
     getBookingOrder()
-  })
+  }, [])
   return (
     <>
       <Header />
@@ -148,30 +143,34 @@ const CustomerDashboard = () => {
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">Nama</th>
-                    <th scope="col">Jenis Kelamin</th>
-                    <th scope="col">Alamat</th>
+                    <th scope="col">Tanggal</th>
+                    <th scope="col">Waktu</th>
+                    <th scope="col">Bertemu dengan</th>
                     <th scope="col">Status Pembayaran</th>
                     <th scope="col" />
                   </tr>
                 </thead>
                 <tbody>
-                  {datas.map(field => (
-                  <tr key={field.fullName}>
+                  {bookingOrder.value.data.map(field => (
+                  <tr key={field.customer_full_name}>
                     <th scope="row">
-                      {field.fullName}
+                      {field.customer_full_name}
                     </th>
-                    <td>Pria</td>
+                    <td>{field.session_date}</td>
                     <td>
-                      {field.address}
+                      {field.session_time}
+                    </td>
+                    <td>
+                      {field.session_name}
                     </td>
                     <td>
                       <Badge color="" className="mr-4 badge-dot">
                         <i className={classnames({
-                          'bg-primary': field.paymentStatus === 'Selesai',
-                          'bg-info': field.paymentStatus === 'Pending',
-                          'bg-danger': field.paymentStatus === 'Dibatalkan',
+                          'bg-primary': field.payment_status === 'Selesai',
+                          'bg-info': field.payment_status === 'PENDING',
+                          'bg-danger': field.payment_status === 'Dibatalkan',
                         })} />
-                        {field.paymentStatus}
+                        {field.payment_status}
                       </Badge>
                     </td>
                     <td className="text-right">
