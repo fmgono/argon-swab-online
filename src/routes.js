@@ -27,41 +27,33 @@ import CustomerDashboard from "views/customers/Dashboard";
 import CustomerProfile from "views/customers/Profile.js";
 import CustomerQueueForm from "views/customers/QueueForm.js";
 import CustomerChangePassword from "views/customers/ChangePassword.js";
+import AdminDashboard from "views/admin/Dashboard";
+import UserList from "views/admin/User";
+import BookingOrder from "views/admin/BookingOrder";
 
 var routes = [
   {
     path: "/index",
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
-    component: Index,
+    component: AdminDashboard,
+    isShow: true,
     layout: "/admin",
   },
   {
-    path: "/icons",
-    name: "Icons",
-    icon: "ni ni-planet text-blue",
-    component: Icons,
+    path: "/users",
+    name: "Pengguna",
+    icon: "fas fa-users text-yellow",
+    component: UserList,
+    isShow: true,
     layout: "/admin",
   },
   {
-    path: "/maps",
-    name: "Maps",
-    icon: "ni ni-pin-3 text-orange",
-    component: Maps,
-    layout: "/admin",
-  },
-  {
-    path: "/user-profile",
-    name: "User Profile",
-    icon: "ni ni-single-02 text-yellow",
-    component: Profile,
-    layout: "/admin",
-  },
-  {
-    path: "/tables",
-    name: "Tables",
+    path: "/orders",
+    name: "Booking Order",
     icon: "ni ni-bullet-list-67 text-red",
-    component: Tables,
+    component: BookingOrder,
+    isShow: true,
     layout: "/admin",
   },
   {
@@ -69,6 +61,7 @@ var routes = [
     name: "Login",
     icon: "ni ni-key-25 text-info",
     component: Login,
+    isShow: false,
     layout: "/auth",
   },
   {
@@ -76,6 +69,7 @@ var routes = [
     name: "Register",
     icon: "ni ni-circle-08 text-pink",
     component: Register,
+    isShow: false,
     layout: "/auth",
   },
   {
@@ -83,6 +77,7 @@ var routes = [
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: CustomerDashboard,
+    isShow: false,
     layout: "/customer",
   },
   {
@@ -90,6 +85,7 @@ var routes = [
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: CustomerProfile,
+    isShow: false,
     layout: "/customer",
   },
   {
@@ -97,6 +93,7 @@ var routes = [
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: CustomerQueueForm,
+    isShow: false,
     layout: "/customer",
   },
   {
@@ -104,6 +101,7 @@ var routes = [
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: CustomerChangePassword,
+    isShow: false,
     layout: "/customer",
   },
 ];
