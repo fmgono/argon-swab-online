@@ -68,8 +68,8 @@ const Auth = (props) => {
               <Row className="justify-content-center">
                 <Col lg="5" md="6">
                   <h1 className="text-white">Selamat Datang!</h1>
-                  <p className="text-lead text-white">
-                    di Faksin UN DKI
+                  <p className="text-white text-lead">
+                    di Pendaftaran Vaksin
                   </p>
                 </Col>
               </Row>

@@ -81,7 +81,7 @@ const Login = () => {
                     type="text" 
                     id="email"
                     name="email"
-                    placeholder="test@gmail.com"
+                    placeholder="Email / No HP"
                     onChange={formik.handleChange}
                     value={formik.values.email}
                     invalid={Boolean(formik.errors.email)} />
