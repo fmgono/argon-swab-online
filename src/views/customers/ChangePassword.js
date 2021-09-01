@@ -68,7 +68,7 @@ const Profile = () => {
           setFailed(true)
         }
         setSuccess(true)
-        formik.setValues({
+        formik.resetForm({
           id: '',
           oldPassword: '',
           confirmationPassword: '',
@@ -117,7 +117,7 @@ const Profile = () => {
               <CardBody>
               <Form role="form" onSubmit={formik.handleSubmit}>
                 <FormGroup>
-                  <Label className="form-control-label" for="phone-number">Kata Sandi Lama</Label>
+                  <Label className="form-control-label" for="password">Kata Sandi Lama</Label>
                   <InputGroup className="input-group-alternative">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
@@ -136,7 +136,7 @@ const Profile = () => {
                   {formik.errors.password ? <small className="text-red">{formik.errors.password}</small> : null}
                 </FormGroup>
                 <FormGroup>
-                  <Label className="form-control-label" for="phone-number">Kata Sandi Baru</Label>
+                  <Label className="form-control-label" for="newPassword">Kata Sandi Baru</Label>
                   <InputGroup className="input-group-alternative">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
@@ -145,7 +145,7 @@ const Profile = () => {
                     </InputGroupAddon>
                     <Input
                       type="password"
-                      id="password"
+                      id="newPassword"
                       name="newPassword"
                       placeholder="Kata Sandi"
                       onChange={formik.handleChange}
@@ -155,7 +155,7 @@ const Profile = () => {
                   {formik.errors.newPassword ? <small className="text-red">{formik.errors.newPassword}</small> : null}
                 </FormGroup>
                 <FormGroup>
-                  <Label className="form-control-label" for="phone-number">Konfirmasi Password</Label>
+                  <Label className="form-control-label" for="confirmationPassword">Konfirmasi Password</Label>
                   <InputGroup className="input-group-alternative">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
