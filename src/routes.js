@@ -30,6 +30,7 @@ import CustomerChangePassword from "views/customers/ChangePassword.js";
 import AdminDashboard from "views/admin/Dashboard";
 import UserList from "views/admin/User";
 import BookingOrder from "views/admin/BookingOrder";
+import Activation from "views/activation/index";
 
 var routes = [
   {
@@ -69,6 +70,14 @@ var routes = [
     name: "Register",
     icon: "ni ni-circle-08 text-pink",
     component: Register,
+    isShow: false,
+    layout: "/auth",
+  },
+  {
+    path: "/activation/:id",
+    name: "Activation",
+    icon: "ni ni-circle-08 text-pink",
+    component: Activation,
     isShow: false,
     layout: "/auth",
   },
